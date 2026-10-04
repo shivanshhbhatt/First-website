@@ -5,36 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>WOODORA | Furniture & Plywood Décor</title>
+    <title>Friendly Furniture | Premium Furniture & Décor</title>
 
     <meta name="description"
-        content="Premium furniture, plywood décor and custom wooden pieces. Enquire directly with us.">
+        content="Friendly Furniture — premium furniture, plywood décor and custom wooden pieces. Explore our catalogues and enquire directly with us.">
+
+    <meta name="theme-color" content="#1c1c18">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <!-- Premium Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
         rel="stylesheet">
+
+    <!-- PDF.js -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js">
+    </script>
 
     <style>
 
-        :root {
-            --dark: #171713;
-            --dark2: #24231f;
-            --cream: #f5f1e9;
-            --cream2: #ebe5da;
-            --white: #fff;
-            --brown: #8b6245;
-            --brown2: #b38a69;
-            --text: #272621;
-            --muted: #77736b;
-            --border: rgba(23, 23, 19, .13);
+        /* =====================================================
+           ROOT
+        ===================================================== */
 
-            --serif: "Playfair Display", serif;
-            --sans: "DM Sans", sans-serif;
+        :root {
+
+            --cream: #f5f1e8;
+            --cream-dark: #e9e1d4;
+
+            --dark: #1c1c18;
+            --dark-soft: #292923;
+
+            --brown: #876b4d;
+            --brown-light: #b99b75;
+
+            --text: #292923;
+            --muted: #77736b;
+
+            --border: rgba(28, 28, 24, .14);
+
+            --white: #ffffff;
+
+            --serif: "Cormorant Garamond", Georgia, serif;
+            --display: "Playfair Display", Georgia, serif;
+            --sans: "Inter", Arial, sans-serif;
         }
 
+
+        /* =====================================================
+           RESET
+        ===================================================== */
 
         * {
             margin: 0;
@@ -53,1023 +76,1080 @@
             overflow-x: hidden;
         }
 
+        body.modal-open {
+            overflow: hidden;
+        }
+
         a {
-            text-decoration: none;
             color: inherit;
+            text-decoration: none;
         }
 
         button,
         input,
-        textarea,
-        select {
+        textarea {
             font-family: inherit;
         }
 
         img {
-            display: block;
             max-width: 100%;
+            display: block;
         }
 
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--cream);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--brown);
-        }
-
-
-        /* LOGO */
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-        }
-
-        .logo-mark {
-            width: 42px;
-            height: 42px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-mark svg {
-            width: 42px;
-            height: 42px;
-        }
-
-        .logo-text {
-            font-size: 20px;
-            letter-spacing: 4px;
-            font-weight: 700;
-        }
-
-        .logo-text span {
-            font-weight: 400;
-        }
-
-
-        /* NAVBAR */
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
 
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
+
             width: 100%;
-            height: 82px;
-            padding: 0 6.5%;
+            height: 78px;
+
+            z-index: 1000;
+
+            background: rgba(245, 241, 232, .94);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            width: min(1200px, 92%);
+            height: 100%;
+
+            margin: auto;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            z-index: 1000;
-            transition: .4s ease;
         }
 
-        .navbar.scrolled {
-            background: rgba(245, 241, 233, .94);
-            backdrop-filter: blur(18px);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, .06);
+
+        /* =====================================================
+           PREMIUM FRIENDLY FURNITURE LOGO
+        ===================================================== */
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+
+            line-height: .8;
+
+            position: relative;
         }
+
+        .logo-main {
+            font-family: var(--display);
+
+            font-size: 31px;
+            font-weight: 600;
+
+            letter-spacing: -1px;
+
+            color: var(--dark);
+
+            position: relative;
+        }
+
+        .logo-main::after {
+            content: "";
+
+            position: absolute;
+
+            left: 1px;
+            bottom: -6px;
+
+            width: 34px;
+            height: 2px;
+
+            background: var(--brown);
+
+            border-radius: 10px;
+        }
+
+        .logo-sub {
+            margin-top: 12px;
+
+            font-family: var(--sans);
+
+            font-size: 7px;
+
+            letter-spacing: 5px;
+
+            color: var(--brown);
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           NAV LINKS
+        ===================================================== */
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 34px;
+
+            gap: 28px;
         }
 
         .nav-links a {
             position: relative;
-            font-size: 12px;
-            color: #4e4b45;
+
+            font-size: 10px;
+            letter-spacing: 1.4px;
+
+            text-transform: uppercase;
         }
 
-        .nav-links a:after {
+        .nav-links a:not(.nav-contact)::after {
             content: "";
+
             position: absolute;
+
             left: 0;
-            bottom: -8px;
-            height: 1px;
+            bottom: -7px;
+
             width: 0;
+            height: 1px;
+
             background: var(--brown);
+
             transition: .3s;
         }
 
-        .nav-links a:hover:after {
+        .nav-links a:not(.nav-contact):hover::after {
             width: 100%;
         }
 
-        .nav-btn {
+        .nav-contact {
+            padding: 12px 18px;
+
             background: var(--dark);
             color: white;
-            padding: 14px 23px;
-            font-size: 11px;
-            letter-spacing: .4px;
+
             transition: .3s;
         }
 
-        .nav-btn:hover {
+        .nav-contact:hover {
             background: var(--brown);
-            transform: translateY(-3px);
         }
 
         .menu-btn {
             display: none;
+
             border: 0;
             background: none;
+
             font-size: 27px;
+
             cursor: pointer;
         }
 
 
-        /* HERO */
+        /* =====================================================
+           HERO
+        ===================================================== */
 
         .hero {
             min-height: 100vh;
-            padding: 145px 7% 80px;
+
+            padding-top: 78px;
+
             display: grid;
-            grid-template-columns: .9fr 1.1fr;
-            gap: 70px;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            grid-template-columns: 1fr 1fr;
+
+            background: var(--cream);
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .hero-left {
+            display: flex;
+            align-items: center;
+
+            padding: 90px 8%;
         }
 
         .eyebrow {
-            font-size: 10px;
-            letter-spacing: 3px;
-            color: var(--brown);
-            font-weight: 700;
             margin-bottom: 20px;
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            color: var(--brown);
+
+            font-weight: 600;
         }
 
         .hero h1 {
+            margin-bottom: 30px;
+
             font-family: var(--serif);
-            font-size: clamp(55px, 6.2vw, 92px);
-            line-height: .96;
-            letter-spacing: -3px;
-            font-weight: 500;
+
+            font-size: clamp(58px, 7vw, 100px);
+
+            font-weight: 400;
+
+            line-height: .84;
         }
 
         .hero h1 em {
             color: var(--brown);
+
+            font-style: italic;
         }
 
         .hero-text {
+            max-width: 470px;
+
+            margin-bottom: 34px;
+
             color: var(--muted);
+
             font-size: 14px;
+
             line-height: 1.9;
-            max-width: 480px;
-            margin: 30px 0;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 13px;
-            align-items: center;
+            flex-wrap: wrap;
+
+            gap: 12px;
         }
 
         .primary-btn,
-        .secondary-btn,
-        .white-btn {
+        .secondary-btn {
             display: inline-flex;
+
             align-items: center;
             justify-content: center;
-            gap: 18px;
-            padding: 16px 25px;
-            font-size: 11px;
-            transition: .35s;
+
+            padding: 14px 22px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            transition: .3s;
         }
 
         .primary-btn {
+            border: 1px solid var(--dark);
+
             background: var(--dark);
+
             color: white;
+
+            cursor: pointer;
         }
 
         .primary-btn:hover {
+            border-color: var(--brown);
+
             background: var(--brown);
-            transform: translateY(-4px);
         }
 
         .secondary-btn {
             border: 1px solid var(--border);
+
+            background: transparent;
         }
 
         .secondary-btn:hover {
-            background: white;
-            transform: translateY(-4px);
-        }
+            background: var(--dark);
 
-        .hero-visual {
-            height: 650px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 1s;
-        }
-
-        .hero-visual:hover img {
-            transform: scale(1.035);
-        }
-
-        .hero-visual:after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom,
-                    transparent 50%,
-                    rgba(0, 0, 0, .5));
-        }
-
-        .hero-caption {
-            position: absolute;
-            z-index: 3;
-            bottom: 32px;
-            left: 32px;
             color: white;
-            display: flex;
-            align-items: center;
-            gap: 18px;
         }
 
-        .hero-number {
-            font-family: var(--serif);
-            font-size: 42px;
-            opacity: .7;
+        .hero-right {
+            position: relative;
+
+            min-height: 650px;
+
+            background:
+                linear-gradient(
+                    rgba(30, 29, 24, .18),
+                    rgba(30, 29, 24, .25)
+                ),
+                url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=85")
+                center / cover;
         }
 
-        .hero-caption strong {
+        .hero-badge {
+            position: absolute;
+
+            right: 30px;
+            bottom: 30px;
+
+            width: 185px;
+
+            padding: 18px 20px;
+
+            background: rgba(255, 255, 255, .92);
+        }
+
+        .hero-badge strong {
             display: block;
+
+            margin-bottom: 5px;
+
             font-family: var(--serif);
-            font-size: 22px;
+
+            font-size: 25px;
+
             font-weight: 500;
         }
 
-        .hero-caption small {
-            opacity: .7;
-        }
+        .hero-badge span {
+            font-size: 8px;
 
-        .hero-decoration {
-            position: absolute;
-            width: 470px;
-            height: 470px;
-            border-radius: 50%;
-            background: #dfcfbd;
-            right: -200px;
-            bottom: -210px;
-            opacity: .45;
+            letter-spacing: 1.5px;
+
+            color: var(--muted);
         }
 
 
-        /* TRUST */
-
-        .trust {
-            background: var(--dark);
-            color: white;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 30px 7%;
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-right: 1px solid rgba(255, 255, 255, .13);
-            padding-left: 20px;
-        }
-
-        .trust-item:first-child {
-            padding-left: 0;
-        }
-
-        .trust-item:last-child {
-            border-right: 0;
-        }
-
-        .trust-item b {
-            color: var(--brown2);
-            font-family: var(--serif);
-            font-size: 27px;
-        }
-
-        .trust-item span {
-            font-size: 11px;
-            color: rgba(255, 255, 255, .65);
-        }
-
-
-        /* GENERAL */
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
 
         .section {
-            padding: 120px 7%;
+            padding: 110px 0;
+        }
+
+        .section-inner {
+            width: min(1200px, 92%);
+
+            margin: auto;
         }
 
         .heading {
             display: flex;
-            justify-content: space-between;
+
             align-items: end;
+            justify-content: space-between;
+
+            gap: 40px;
+
             margin-bottom: 55px;
         }
 
         .heading h2 {
             font-family: var(--serif);
-            font-size: clamp(45px, 5vw, 70px);
-            font-weight: 500;
-            line-height: 1;
-            letter-spacing: -2px;
+
+            font-size: clamp(44px, 5vw, 68px);
+
+            font-weight: 400;
+
+            line-height: .9;
         }
 
         .heading h2 em {
             color: var(--brown);
+
+            font-style: italic;
         }
 
-        .heading>p {
-            max-width: 360px;
+        .heading > p {
+            max-width: 380px;
+
             color: var(--muted);
-            font-size: 13px;
+
+            font-size: 12px;
+
             line-height: 1.8;
         }
 
 
-        /* CATEGORIES */
+        /* =====================================================
+           PRODUCTS
+        ===================================================== */
 
-        .category-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr;
-            gap: 17px;
+        .products-section {
+            background: white;
         }
-
-        .category {
-            height: 500px;
-            overflow: hidden;
-            position: relative;
-            background: #222;
-        }
-
-        .category img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: .9s;
-        }
-
-        .category:hover img {
-            transform: scale(1.08);
-        }
-
-        .category:after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(transparent 35%,
-                    rgba(0, 0, 0, .8));
-        }
-
-        .category-content {
-            position: absolute;
-            z-index: 2;
-            left: 28px;
-            right: 28px;
-            bottom: 28px;
-            color: white;
-        }
-
-        .category-content small {
-            color: #d2ae91;
-        }
-
-        .category-content h3 {
-            font-family: var(--serif);
-            font-size: 35px;
-            font-weight: 500;
-            margin: 7px 0;
-        }
-
-        .category-content p {
-            font-size: 11px;
-            color: rgba(255, 255, 255, .7);
-            margin-bottom: 16px;
-        }
-
-        .category-content b {
-            font-size: 11px;
-        }
-
-
-        /* FILTER */
 
         .filters {
             display: flex;
-            gap: 9px;
-            margin-bottom: 38px;
+
             flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 35px;
         }
 
-        .filter {
+        .filter-btn {
+            padding: 9px 16px;
+
             border: 1px solid var(--border);
+
             background: transparent;
-            padding: 11px 20px;
-            font-size: 11px;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
             cursor: pointer;
-            transition: .3s;
         }
 
-        .filter:hover,
-        .filter.active {
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--dark);
+
             background: var(--dark);
+
             color: white;
         }
 
-
-        /* PRODUCTS */
-
         .products-grid {
             display: grid;
+
             grid-template-columns: repeat(3, 1fr);
-            gap: 48px 20px;
+
+            gap: 22px;
         }
 
-        .product {
-            transition: .4s;
+        .product-card {
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            background: var(--cream);
+
+            cursor: pointer;
+
+            transition: .35s;
         }
 
-        .product.hide {
-            display: none;
+        .product-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, .08);
         }
 
         .product-image {
-            height: 430px;
-            position: relative;
+            height: 280px;
+
             overflow: hidden;
-            background: #e4ded4;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
+
             object-fit: cover;
-            transition: .8s;
+
+            transition: .5s;
         }
 
-        .product:hover .product-image img {
-            transform: scale(1.07);
-        }
-
-        .product-tag {
-            position: absolute;
-            top: 17px;
-            left: 17px;
-            background: rgba(255, 255, 255, .9);
-            padding: 8px 12px;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .plus {
-            position: absolute;
-            right: 18px;
-            bottom: 18px;
-            width: 47px;
-            height: 47px;
-            border-radius: 50%;
-            border: 0;
-            background: white;
-            font-size: 25px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: .35s;
-        }
-
-        .product:hover .plus {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .plus:hover {
-            background: var(--dark);
-            color: white;
-            transform: rotate(90deg) !important;
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-info {
-            padding-top: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 22px;
+        }
+
+        .product-category {
+            margin-bottom: 8px;
+
+            color: var(--brown);
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
         }
 
         .product-info h3 {
             font-family: var(--serif);
-            font-size: 20px;
+
+            font-size: 27px;
+
             font-weight: 500;
         }
 
-        .product-info p {
-            color: var(--muted);
-            font-size: 10px;
-            margin-top: 5px;
+
+        /* =====================================================
+           CATALOGUES
+        ===================================================== */
+
+        .catalogues-section {
+            background: var(--cream-dark);
         }
 
-        .product-arrow {
-            width: 42px;
-            height: 42px;
+        .catalogue-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px;
+        }
+
+        .catalogue-card {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 24px;
+
+            padding: 34px;
+
             border: 1px solid var(--border);
-            background: none;
-            border-radius: 50%;
-            cursor: pointer;
+
+            background: white;
+
             transition: .3s;
         }
 
-        .product-arrow:hover {
-            background: var(--dark);
-            color: white;
-            transform: rotate(-45deg);
+        .catalogue-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, .07);
         }
 
+        .catalogue-icon {
+            width: 64px;
+            height: 64px;
 
-        /* ABOUT */
+            flex: 0 0 64px;
 
-        .about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            align-items: center;
-        }
-
-        .about-image {
-            height: 650px;
-            position: relative;
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .about-box {
-            position: absolute;
-            bottom: -28px;
-            right: -28px;
-            width: 155px;
-            height: 155px;
-            background: var(--dark);
-            color: white;
             display: flex;
+
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            text-align: center;
+
+            background: var(--dark);
+
+            color: var(--brown-light);
+
+            font-family: var(--display);
+
+            font-size: 31px;
         }
 
-        .about-box strong {
-            font-family: var(--serif);
-            font-size: 23px;
-        }
+        .catalogue-label {
+            margin-bottom: 7px;
 
-        .about-box span {
-            color: var(--brown2);
-            font-size: 8px;
+            color: var(--brown);
+
+            font-size: 9px;
+
             letter-spacing: 2px;
-            margin-top: 5px;
         }
 
-        .about-content h2 {
+        .catalogue-card h3 {
+            margin-bottom: 10px;
+
             font-family: var(--serif);
-            font-size: clamp(45px, 5vw, 70px);
-            line-height: 1;
+
+            font-size: 29px;
+
             font-weight: 500;
-            margin-bottom: 30px;
         }
 
-        .about-content h2 em {
-            color: var(--brown);
-        }
+        .catalogue-description {
+            margin-bottom: 22px;
 
-        .about-content p:not(.eyebrow) {
             color: var(--muted);
-            font-size: 13px;
-            line-height: 1.9;
-            max-width: 500px;
-            margin-bottom: 20px;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        .catalogue-view-btn {
+            border: 1px solid var(--dark);
         }
 
 
-        /* CTA */
+        /* =====================================================
+           ABOUT
+        ===================================================== */
 
-        .cta {
-            padding: 130px 7%;
+        .about-section {
+            background: var(--dark);
+
             color: white;
-            text-align: center;
-            background:
-                linear-gradient(rgba(20, 20, 16, .85), rgba(20, 20, 16, .9)),
-                url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85");
-            background-size: cover;
-            background-position: center;
         }
 
-        .cta-inner {
-            max-width: 800px;
-            margin: auto;
+        .about-section .eyebrow {
+            color: var(--brown-light);
         }
 
-        .cta h2 {
-            font-family: var(--serif);
-            font-size: clamp(48px, 6vw, 80px);
-            line-height: 1;
-            font-weight: 500;
-            margin-bottom: 25px;
+        .about-section .heading h2 {
+            color: white;
         }
 
-        .cta h2 em {
-            color: var(--brown2);
+        .about-section .heading h2 em {
+            color: var(--brown-light);
         }
 
-        .cta p:not(.eyebrow) {
+        .about-text {
+            max-width: 750px;
+
             color: rgba(255, 255, 255, .65);
-            margin-bottom: 35px;
-        }
 
-        .white-btn {
-            background: white;
-            color: var(--dark);
-        }
+            font-size: 15px;
 
-        .white-btn:hover {
-            background: var(--brown2);
-            color: white;
-            transform: translateY(-4px);
+            line-height: 2;
         }
 
 
-        /* CONTACT */
+        /* =====================================================
+           CONTACT
+        ===================================================== */
 
-        .contact {
+        .contact-section {
+            background: var(--cream);
+        }
+
+        .contact-grid {
             display: grid;
-            grid-template-columns: .8fr 1.2fr;
-            gap: 100px;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 60px;
         }
 
-        .contact-info h2 {
+        .contact-info h3 {
+            margin-bottom: 20px;
+
             font-family: var(--serif);
-            font-size: clamp(45px, 5vw, 70px);
-            line-height: 1;
-            font-weight: 500;
-            margin-bottom: 25px;
+
+            font-size: 42px;
+
+            font-weight: 400;
         }
 
-        .contact-info h2 em {
-            color: var(--brown);
-        }
+        .contact-info p {
+            max-width: 500px;
 
-        .contact-info>p:not(.eyebrow) {
-            max-width: 400px;
             color: var(--muted);
+
             font-size: 13px;
+
             line-height: 1.8;
         }
 
-        .contact-details {
-            margin-top: 45px;
+        .contact-numbers {
+            display: grid;
+
+            gap: 10px;
+
+            margin-top: 30px;
         }
 
-        .detail {
-            margin-bottom: 25px;
-        }
-
-        .detail span {
-            display: block;
-            color: var(--brown);
-            font-size: 9px;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-
-        .detail a {
+        .phone {
             font-family: var(--serif);
-            font-size: 18px;
+
+            font-size: 25px;
+
+            transition: .25s;
+        }
+
+        .phone:hover {
+            color: var(--brown);
         }
 
         .contact-form {
-            background: white;
-            padding: 45px;
-        }
-
-        .input-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+
+            gap: 12px;
         }
 
-        .input-group {
-            margin-bottom: 22px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 10px;
-            margin-bottom: 8px;
-        }
-
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
+        .contact-form input,
+        .contact-form textarea {
             width: 100%;
-            border: 0;
-            border-bottom: 1px solid var(--border);
-            background: transparent;
-            padding: 13px 0;
+
+            padding: 15px;
+
+            border: 1px solid var(--border);
+
+            background: white;
+
             outline: none;
-            font-size: 12px;
-            color: var(--text);
         }
 
-        .input-group input:focus,
-        .input-group textarea:focus,
-        .input-group select:focus {
-            border-color: var(--brown);
-        }
+        .contact-form textarea {
+            min-height: 130px;
 
-        .input-group textarea {
             resize: vertical;
         }
 
-        .submit {
-            width: 100%;
-            border: 0;
-            padding: 17px;
-            background: var(--dark);
-            color: white;
-            cursor: pointer;
-            transition: .35s;
-        }
-
-        .submit:hover {
-            background: var(--brown);
-            transform: translateY(-3px);
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--brown);
         }
 
 
-        /* FOOTER */
+        /* =====================================================
+           FOOTER
+        ===================================================== */
 
         footer {
-            background: var(--dark);
+            padding: 42px 0;
+
+            background: var(--dark-soft);
+
             color: white;
-            padding: 65px 7% 25px;
         }
 
-        .footer-top {
+        .footer-inner {
+            width: min(1200px, 92%);
+
+            margin: auto;
+
             display: flex;
+
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 55px;
-            border-bottom: 1px solid rgba(255, 255, 255, .12);
+
+            gap: 20px;
         }
 
-        .footer-top p {
-            color: rgba(255, 255, 255, .5);
-            font-size: 11px;
+        .footer-logo {
+            font-family: var(--display);
+
+            font-size: 28px;
+
+            font-weight: 600;
+
+            letter-spacing: -.5px;
         }
 
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
+        .footer-copy {
+            color: rgba(255, 255, 255, .55);
 
-        .footer-links a {
-            color: rgba(255, 255, 255, .7);
-            font-size: 11px;
-        }
+            font-size: 10px;
 
-        .footer-links a:hover {
-            color: white;
-        }
+            letter-spacing: .3px;
 
-        .footer-bottom {
-            padding-top: 23px;
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255, 255, 255, .35);
-            font-size: 9px;
+            text-align: right;
         }
 
 
-        /* MODAL */
+        /* =====================================================
+           WHATSAPP
+        ===================================================== */
 
-        .modal {
+        .whatsapp {
             position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, .68);
-            backdrop-filter: blur(8px);
+
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 3000;
+
+            width: 55px;
+            height: 55px;
+
+            border-radius: 50%;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            z-index: 3000;
-            opacity: 0;
-            visibility: hidden;
-            transition: .35s;
-        }
 
-        .modal.show {
-            opacity: 1;
-            visibility: visible;
-        }
+            background: #25D366;
 
-        .modal-box {
-            width: 100%;
-            max-width: 550px;
-            background: var(--cream);
-            padding: 55px;
-            position: relative;
-            transform: translateY(30px);
-            transition: .4s;
-        }
-
-        .modal.show .modal-box {
-            transform: translateY(0);
-        }
-
-        .modal-box h2 {
-            font-family: var(--serif);
-            font-size: 45px;
-            font-weight: 500;
-            margin-bottom: 18px;
-        }
-
-        .modal-description {
-            color: var(--muted);
-            line-height: 1.8;
-            font-size: 13px;
-            margin-bottom: 30px;
-        }
-
-        .close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            width: 35px;
-            height: 35px;
-            border: 0;
-            border-radius: 50%;
-            background: var(--dark);
             color: white;
-            cursor: pointer;
-            font-size: 20px;
+
+            font-size: 24px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, .2);
+
+            transition: .25s;
+        }
+
+        .whatsapp:hover {
+            transform: translateY(-4px) scale(1.04);
         }
 
 
-        /* TOAST */
+        /* =====================================================
+           PDF MODAL
+        ===================================================== */
 
-        .toast {
+        .pdf-modal {
             position: fixed;
-            right: 25px;
-            bottom: 25px;
-            background: var(--dark);
-            color: white;
-            padding: 15px 22px;
-            font-size: 11px;
+
+            inset: 0;
+
             z-index: 5000;
-            transform: translateY(100px);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px;
+
             opacity: 0;
-            transition: .4s;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition: .25s ease;
         }
 
-        .toast.show {
-            transform: translateY(0);
+        .pdf-modal.show {
             opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+        }
+
+        .pdf-backdrop {
+            position: absolute;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, .88);
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .pdf-box {
+            position: relative;
+
+            z-index: 2;
+
+            width: min(1250px, 97vw);
+
+            height: min(94vh, 900px);
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+            background: #252525;
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, .5);
+        }
+
+        .pdf-topbar {
+            height: 58px;
+
+            flex: 0 0 58px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 14px 0 20px;
+
+            background: #1c1c18;
+
+            color: white;
+        }
+
+        .pdf-title {
+            font-family: var(--serif);
+
+            font-size: 23px;
+        }
+
+        .pdf-close {
+            width: 40px;
+            height: 40px;
+
+            border: 1px solid rgba(255,255,255,.2);
+
+            background: rgba(255,255,255,.08);
+
+            color: white;
+
+            font-size: 24px;
+
+            cursor: pointer;
+        }
+
+        .pdf-close:hover {
+            background: rgba(255,255,255,.2);
         }
 
 
-        /* ANIMATIONS */
+        /* =====================================================
+           CUSTOM PDF VIEWER
+        ===================================================== */
+
+        .pdf-viewer {
+            position: relative;
+
+            flex: 1;
+
+            overflow: auto;
+
+            background: #555;
+
+            display: flex;
+
+            justify-content: center;
+
+            overscroll-behavior: contain;
+
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pdf-pages {
+            width: 100%;
+
+            padding: 25px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+        .pdf-page {
+            display: block;
+
+            max-width: 100%;
+
+            height: auto;
+
+            background: white;
+
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, .3);
+
+            user-select: none;
+
+            -webkit-user-select: none;
+
+            -webkit-touch-callout: none;
+        }
+
+        .pdf-loading {
+            position: absolute;
+
+            inset: 0;
+
+            z-index: 5;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #555;
+
+            color: white;
+
+            font-size: 12px;
+
+            letter-spacing: 1.5px;
+        }
+
+        .pdf-loading.hidden {
+            display: none;
+        }
+
+        .pdf-error {
+            padding: 60px 25px;
+
+            max-width: 650px;
+
+            text-align: center;
+
+            color: white;
+        }
+
+        .pdf-error h3 {
+            margin-bottom: 12px;
+
+            font-family: var(--serif);
+
+            font-size: 32px;
+
+            font-weight: 400;
+        }
+
+        .pdf-error p {
+            color: rgba(255,255,255,.7);
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           REVEAL
+        ===================================================== */
 
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
+
+            transform: translateY(25px);
+
             transition:
-                opacity .9s ease,
-                transform .9s ease;
+                opacity .7s ease,
+                transform .7s ease;
         }
 
         .reveal.visible {
             opacity: 1;
+
             transform: translateY(0);
         }
 
-        .delay-1 {
-            transition-delay: .12s;
-        }
 
-        .delay-2 {
-            transition-delay: .24s;
-        }
+        /* =====================================================
+           MOBILE
+        ===================================================== */
 
-        .delay-3 {
-            transition-delay: .36s;
-        }
-
-
-        /* MOBILE */
-
-        @media(max-width:1000px) {
-
-            .hero {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-visual {
-                height: 550px;
-            }
-
-            .category-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .category:first-child {
-                grid-column: span 2;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .about,
-            .contact {
-                grid-template-columns: 1fr;
-            }
-
-            .about {
-                gap: 70px;
-            }
-
-            .contact {
-                gap: 55px;
-            }
-        }
-
-
-        @media(max-width:700px) {
-
-            .navbar {
-                height: 70px;
-                padding: 0 5%;
-            }
-
-            .logo-text {
-                font-size: 17px;
-            }
-
-            .logo-mark {
-                width: 36px;
-                height: 36px;
-            }
-
-            .logo-mark svg {
-                width: 36px;
-                height: 36px;
-            }
+        @media (max-width: 900px) {
 
             .nav-links {
-                position: absolute;
+                position: fixed;
+
+                top: 78px;
                 left: 0;
-                top: 70px;
+
                 width: 100%;
-                background: var(--cream);
-                padding: 25px 5%;
+
+                padding: 25px;
+
+                display: none;
+
                 flex-direction: column;
+
                 align-items: flex-start;
-                gap: 20px;
-                transform: translateY(-150%);
-                transition: .4s;
-                box-shadow: 0 20px 35px rgba(0, 0, 0, .06);
+
+                background: var(--cream);
+
+                border-bottom: 1px solid var(--border);
             }
 
             .nav-links.open {
-                transform: translateY(0);
-            }
-
-            .nav-btn {
-                display: none;
+                display: flex;
             }
 
             .menu-btn {
@@ -1077,1090 +1157,936 @@
             }
 
             .hero {
-                padding: 110px 5% 65px;
-                gap: 45px;
-            }
-
-            .hero h1 {
-                font-size: 52px;
-                letter-spacing: -2px;
-            }
-
-            .hero-visual {
-                height: 470px;
-            }
-
-            .trust {
-                grid-template-columns: 1fr 1fr;
-                padding: 28px 5%;
-                gap: 20px;
-            }
-
-            .trust-item {
-                border: 0;
-                padding: 0;
-            }
-
-            .section {
-                padding: 80px 5%;
-            }
-
-            .heading {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 22px;
-            }
-
-            .heading>p {
-                width: 100%;
-            }
-
-            .category-grid {
                 grid-template-columns: 1fr;
             }
 
-            .category:first-child {
-                grid-column: auto;
+            .hero-right {
+                min-height: 500px;
             }
 
-            .category {
-                height: 430px;
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .catalogue-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: 70px;
+            }
+
+            .nav-links {
+                top: 70px;
+            }
+
+            .logo-main {
+                font-size: 27px;
+            }
+
+            .logo-sub {
+                font-size: 6px;
+                letter-spacing: 4px;
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+
+            .hero-left {
+                padding: 75px 6%;
+            }
+
+            .hero-right {
+                min-height: 420px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .heading {
+                display: block;
+            }
+
+            .heading > p {
+                margin-top: 20px;
             }
 
             .products-grid {
                 grid-template-columns: 1fr;
             }
 
-            .product-image {
-                height: 420px;
-            }
-
-            .about-image {
-                height: 480px;
-            }
-
-            .about-box {
-                right: -8px;
-                bottom: -18px;
-            }
-
-            .contact-form {
-                padding: 30px 20px;
-            }
-
-            .input-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .footer-top {
+            .catalogue-card {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 25px;
+
+                padding: 25px;
             }
 
-            .footer-links {
-                flex-wrap: wrap;
+            .catalogue-icon {
+                width: 58px;
+                height: 58px;
+
+                flex-basis: 58px;
             }
 
-            .footer-bottom {
+            .pdf-box {
+                width: 100%;
+
+                height: 96vh;
+            }
+
+            .pdf-topbar {
+                height: 54px;
+
+                flex-basis: 54px;
+            }
+
+            .pdf-title {
+                font-size: 19px;
+            }
+
+            .pdf-pages {
+                padding: 10px;
+            }
+
+            .footer-inner {
                 flex-direction: column;
-                gap: 10px;
+
+                text-align: center;
             }
 
-            .modal-box {
-                padding: 40px 25px;
-            }
+            .footer-copy {
+                text-align: center;
 
-            .modal-box h2 {
-                font-size: 38px;
+                line-height: 1.6;
             }
-
         }
 
     </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- NAVBAR -->
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
-    <header class="navbar" id="navbar">
+    <header class="navbar">
 
-        <a href="#home" class="brand">
+        <div class="nav-inner">
 
-            <div class="logo-mark">
+            <a href="#home" class="logo">
 
-                <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span class="logo-main">
+                    Friendly
+                </span>
 
-                    <path d="M25 4
-                       C14 10 8 17 8 27
-                       C8 37 15 44 25 46
-                       C35 44 42 37 42 27
-                       C42 17 36 10 25 4Z" stroke="#8B6245" stroke-width="2.5" />
-
-                    <path d="M25 9
-                       C20 16 20 25 25 41" stroke="#171713" stroke-width="2" />
-
-                    <path d="M14 18
-                       C19 21 22 21 25 20
-                       C29 19 33 17 37 15" stroke="#171713" stroke-width="1.6" />
-
-                    <path d="M11 28
-                       C17 30 20 30 25 28
-                       C30 26 34 25 40 27" stroke="#171713" stroke-width="1.6" />
-
-                    <path d="M15 36
-                       C19 37 22 36 25 34
-                       C29 32 33 32 36 34" stroke="#171713" stroke-width="1.6" />
-
-                </svg>
-
-            </div>
-
-            <div class="logo-text">
-                <span>WOOD</span>ORA
-            </div>
-
-        </a>
-
-
-        <nav class="nav-links" id="navLinks">
-
-            <a href="#home">Home</a>
-            <a href="#categories">Categories</a>
-            <a href="#products">Collection</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-
-        </nav>
-
-
-        <a href="#contact" class="nav-btn">
-            ENQUIRE NOW
-        </a>
-
-
-        <button class="menu-btn" id="menuBtn">
-            ☰
-        </button>
-
-    </header>
-
-
-
-    <main>
-
-
-        <!-- HERO -->
-
-        <section class="hero" id="home">
-
-            <div class="hero-content reveal">
-
-                <p class="eyebrow">
-                    PREMIUM WOODEN CRAFT
-                </p>
-
-                <h1>
-                    Furniture that
-                    <em>defines</em>
-                    your space.
-                </h1>
-
-                <p class="hero-text">
-                    Discover beautifully crafted furniture and plywood décor
-                    designed to bring warmth, character and elegance to
-                    modern spaces.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a href="#products" class="primary-btn">
-                        Explore Collection
-                        →
-                    </a>
-
-                    <a href="#contact" class="secondary-btn">
-                        Get In Touch
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-visual reveal delay-1">
-
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=90"
-                    alt="Modern wooden interior">
-
-                <div class="hero-caption">
-
-                    <span class="hero-number">
-                        01
-                    </span>
-
-                    <div>
-                        <strong>
-                            Modern Living
-                        </strong>
-
-                        <small>
-                            Designed for you
-                        </small>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-decoration"></div>
-
-        </section>
-
-
-
-        <!-- TRUST -->
-
-        <section class="trust">
-
-            <div class="trust-item">
-                <b>01</b>
-                <span>Premium Materials</span>
-            </div>
-
-            <div class="trust-item">
-                <b>02</b>
-                <span>Custom Designs</span>
-            </div>
-
-            <div class="trust-item">
-                <b>03</b>
-                <span>Quality Craftsmanship</span>
-            </div>
-
-            <div class="trust-item">
-                <b>04</b>
-                <span>Direct Enquiry</span>
-            </div>
-
-        </section>
-
-
-
-        <!-- CATEGORIES -->
-
-        <section class="section" id="categories">
-
-            <div class="heading reveal">
-
-                <div>
-
-                    <p class="eyebrow">
-                        EXPLORE
-                    </p>
-
-                    <h2>
-                        Crafted for
-                        <em>every space.</em>
-                    </h2>
-
-                </div>
-
-                <p>
-                    From statement furniture to elegant décor pieces,
-                    explore our collection and find something made
-                    for your space.
-                </p>
-
-            </div>
-
-
-            <div class="category-grid">
-
-
-                <a href="#products" class="category reveal">
-
-                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=90"
-                        alt="Furniture">
-
-                    <div class="category-content">
-
-                        <small>01</small>
-
-                        <h3>Furniture</h3>
-
-                        <p>
-                            Tables • Chairs • Cabinets
-                        </p>
-
-                        <b>
-                            Explore →
-                        </b>
-
-                    </div>
-
-                </a>
-
-
-                <a href="#products" class="category reveal delay-1">
-
-                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=90"
-                        alt="Plywood decor">
-
-                    <div class="category-content">
-
-                        <small>02</small>
-
-                        <h3>Plywood Décor</h3>
-
-                        <p>
-                            Panels • Wall Art • Décor
-                        </p>
-
-                        <b>
-                            Explore →
-                        </b>
-
-                    </div>
-
-                </a>
-
-
-                <a href="#products" class="category reveal delay-2">
-
-                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=90"
-                        alt="Custom furniture">
-
-                    <div class="category-content">
-
-                        <small>03</small>
-
-                        <h3>Custom Pieces</h3>
-
-                        <p>
-                            Made specially for you
-                        </p>
-
-                        <b>
-                            Explore →
-                        </b>
-
-                    </div>
-
-                </a>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- PRODUCTS -->
-
-        <section class="section" id="products">
-
-            <div class="heading reveal">
-
-                <div>
-
-                    <p class="eyebrow">
-                        OUR COLLECTION
-                    </p>
-
-                    <h2>
-                        Designed to
-                        <em>inspire.</em>
-                    </h2>
-
-                </div>
-
-                <p>
-                    Browse our furniture and décor collection.
-                    For pricing and availability, simply send
-                    us an enquiry.
-                </p>
-
-            </div>
-
-
-            <div class="filters">
-
-                <button class="filter active" data-filter="all">
-                    All
-                </button>
-
-                <button class="filter" data-filter="furniture">
-                    Furniture
-                </button>
-
-                <button class="filter" data-filter="decor">
-                    Décor
-                </button>
-
-                <button class="filter" data-filter="custom">
-                    Custom
-                </button>
-
-            </div>
-
-
-            <div class="products-grid" id="productsGrid">
-
-
-                <!-- PRODUCT 1 -->
-
-                <article class="product reveal" data-category="furniture">
-
-                    <div class="product-image">
-
-                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=90"
-                            alt="Lounge Chair">
-
-                        <span class="product-tag">
-                            Furniture
-                        </span>
-
-                        <button class="plus" onclick="openProduct(
-                'Minimal Lounge Chair',
-                'Furniture',
-                'Premium wooden lounge chair with a clean modern design.'
-                )">
-                            +
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div>
-                            <h3>
-                                Minimal Lounge Chair
-                            </h3>
-
-                            <p>
-                                Premium Wood
-                            </p>
-                        </div>
-
-                        <button class="product-arrow" onclick="enquire('Minimal Lounge Chair')">
-                            →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PRODUCT 2 -->
-
-                <article class="product reveal delay-1" data-category="decor">
-
-                    <div class="product-image">
-
-                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=90"
-                            alt="Wall Panel">
-
-                        <span class="product-tag">
-                            Décor
-                        </span>
-
-                        <button class="plus" onclick="openProduct(
-                'Geometric Wall Panel',
-                'Plywood Décor',
-                'Elegant plywood wall panel designed for modern interiors.'
-                )">
-                            +
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div>
-                            <h3>
-                                Geometric Wall Panel
-                            </h3>
-
-                            <p>
-                                Plywood Décor
-                            </p>
-                        </div>
-
-                        <button class="product-arrow" onclick="enquire('Geometric Wall Panel')">
-                            →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PRODUCT 3 -->
-
-                <article class="product reveal delay-2" data-category="furniture">
-
-                    <div class="product-image">
-
-                        <img src="https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=900&q=90"
-                            alt="Wooden Table">
-
-                        <span class="product-tag">
-                            Furniture
-                        </span>
-
-                        <button class="plus" onclick="openProduct(
-                'Natural Wood Side Table',
-                'Furniture',
-                'Elegant wooden side table with a natural premium finish.'
-                )">
-                            +
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div>
-                            <h3>
-                                Natural Wood Side Table
-                            </h3>
-
-                            <p>
-                                Natural Finish
-                            </p>
-                        </div>
-
-                        <button class="product-arrow" onclick="enquire('Natural Wood Side Table')">
-                            →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PRODUCT 4 -->
-
-                <article class="product reveal" data-category="decor">
-
-                    <div class="product-image">
-
-                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=90"
-                            alt="Storage Unit">
-
-                        <span class="product-tag">
-                            Décor
-                        </span>
-
-                        <button class="plus" onclick="openProduct(
-                'Designer Storage Unit',
-                'Plywood Décor',
-                'Stylish plywood storage unit designed for contemporary spaces.'
-                )">
-                            +
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div>
-                            <h3>
-                                Designer Storage Unit
-                            </h3>
-
-                            <p>
-                                Premium Plywood
-                            </p>
-                        </div>
-
-                        <button class="product-arrow" onclick="enquire('Designer Storage Unit')">
-                            →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PRODUCT 5 -->
-
-                <article class="product reveal delay-1" data-category="custom">
-
-                    <div class="product-image">
-
-                        <img src="https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=900&q=90"
-                            alt="Custom Console">
-
-                        <span class="product-tag">
-                            Custom
-                        </span>
-
-                        <button class="plus" onclick="openProduct(
-                'Custom TV Console',
-                'Custom Furniture',
-                'Made-to-measure console designed according to your space.'
-                )">
-                            +
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div>
-                            <h3>
-                                Custom TV Console
-                            </h3>
-
-                            <p>
-                                Made to Measure
-                            </p>
-                        </div>
-
-                        <button class="product-arrow" onclick="enquire('Custom TV Console')">
-                            →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PRODUCT 6 -->
-
-                <article class="product reveal delay-2" data-category="custom">
-
-                    <div class="product-image">
-
-                        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=90"
-                            alt="Custom Wall Decor">
-
-                        <span class="product-tag">
-                            Custom
-                        </span>
-
-                        <button class="plus" onclick="openProduct(
-                'Custom Wall Décor',
-                'Custom Décor',
-                'A custom plywood décor piece created according to your requirement.'
-                )">
-                            +
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div>
-                            <h3>
-                                Custom Wall Décor
-                            </h3>
-
-                            <p>
-                                Custom Design
-                            </p>
-                        </div>
-
-                        <button class="product-arrow" onclick="enquire('Custom Wall Décor')">
-                            →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ABOUT -->
-
-        <section class="section about" id="about">
-
-
-            <div class="about-image reveal">
-
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=90"
-                    alt="Wooden Interior">
-
-                <div class="about-box">
-
-                    <strong>
-                        CRAFTED
-                    </strong>
-
-                    <span>
-                        WITH PASSION
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="about-content reveal">
-
-                <p class="eyebrow">
-                    OUR STORY
-                </p>
-
-                <h2>
-                    Wood is not just
-                    <em>material.</em>
-                    It's character.
-                </h2>
-
-                <p>
-                    We create furniture and décor pieces that combine
-                    timeless design with the natural beauty of wood.
-                </p>
-
-                <p>
-                    From elegant plywood décor to custom furniture,
-                    every piece is selected with attention to design,
-                    quality and detail.
-                </p>
-
-                <p>
-                    Have something specific in mind?
-                    Tell us about your requirement and let's create
-                    something that fits your space.
-                </p>
-
-                <a href="#contact" class="primary-btn">
-                    Discuss Your Requirement →
-                </a>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- CTA -->
-
-        <section class="cta">
-
-            <div class="cta-inner reveal">
-
-                <p class="eyebrow">
-                    HAVE A REQUIREMENT?
-                </p>
-
-                <h2>
-                    Let's create something
-                    <em>beautiful.</em>
-                </h2>
-
-                <p>
-                    Tell us what you're looking for and we'll
-                    get back to you.
-                </p>
-
-                <a href="#contact" class="white-btn">
-                    Start an Enquiry →
-                </a>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- CONTACT -->
-
-        <section class="section contact" id="contact">
-
-
-            <div class="contact-info reveal">
-
-                <p class="eyebrow">
-                    CONTACT
-                </p>
-
-                <h2>
-                    Let's talk about
-                    <em>your space.</em>
-                </h2>
-
-                <p>
-                    Interested in any product?
-                    Have a custom requirement?
-                    Send us a message and we'll connect with you.
-                </p>
-
-
-                <div class="contact-details">
-
-                    <div class="detail">
-
-                        <span>
-                            PHONE
-                        </span>
-
-                        <a href="tel:+917771936644">
-                            +91 77719 36644
-                        </a>
-
-                        <br>
-
-                        <a href="tel:+919589620499">
-                            +91 95896 20499
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <form class="contact-form reveal" id="contactForm">
-
-
-                <div class="input-row">
-
-                    <div class="input-group">
-
-                        <label>
-                            YOUR NAME
-                        </label>
-
-                        <input id="name" type="text" placeholder="Enter your name" required>
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>
-                            PHONE NUMBER
-                        </label>
-
-                        <input id="phone" type="tel" placeholder="Enter phone number" required>
-
-                    </div>
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label>
-                        REQUIREMENT
-                    </label>
-
-                    <select id="requirement">
-
-                        <option value="">
-                            Select your requirement
-                        </option>
-
-                        <option>
-                            Furniture
-                        </option>
-
-                        <option>
-                            Plywood Décor
-                        </option>
-
-                        <option>
-                            Custom Furniture
-                        </option>
-
-                        <option>
-                            Custom Décor
-                        </option>
-
-                        <option>
-                            Other
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label>
-                        MESSAGE
-                    </label>
-
-                    <textarea id="message" rows="5"
-                        placeholder="Tell us about your requirement..."></textarea>
-
-                </div>
-
-
-                <button type="submit" class="submit">
-
-                    Send Enquiry on WhatsApp →
-
-                </button>
-
-
-            </form>
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div class="footer-top">
-
-            <a href="#home" class="brand">
-
-                <div class="logo-mark">
-
-                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                        <path d="M25 4C14 10 8 17 8 27C8 37 15 44 25 46C35 44 42 37 42 27C42 17 36 10 25 4Z"
-                            stroke="#B38A69" stroke-width="2.5" />
-
-                        <path d="M25 9C20 16 20 25 25 41" stroke="white" stroke-width="2" />
-
-                        <path d="M14 18C19 21 22 21 25 20C29 19 33 17 37 15"
-                            stroke="white" stroke-width="1.6" />
-
-                        <path d="M11 28C17 30 20 30 25 28C30 26 34 25 40 27"
-                            stroke="white" stroke-width="1.6" />
-
-                    </svg>
-
-                </div>
-
-                <div class="logo-text">
-                    <span>WOOD</span>ORA
-                </div>
+                <span class="logo-sub">
+                    FURNITURE
+                </span>
 
             </a>
 
 
-            <p>
-                Furniture & plywood décor made for
-                beautiful spaces.
-            </p>
+            <nav class="nav-links" id="navLinks">
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#products">
+                    Products
+                </a>
+
+                <a href="#catalogues">
+                    Catalogues
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#contact" class="nav-contact">
+                    Enquire
+                </a>
+
+            </nav>
 
 
-            <div class="footer-links">
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open Menu">
 
-                <a href="#home">Home</a>
+                ☰
 
-                <a href="#products">Products</a>
-
-                <a href="#about">About</a>
-
-                <a href="#contact">Contact</a>
-
-            </div>
+            </button>
 
         </div>
 
+    </header>
 
-        <div class="footer-bottom">
 
-            <span>
-                © 2026 WOODORA. All rights reserved.
-            </span>
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
 
-            <span>
-                Crafted with wood & passion.
-            </span>
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-left">
+
+                <div>
+
+                    <p class="eyebrow">
+                        PREMIUM FURNITURE & DÉCOR
+                    </p>
+
+                    <h1>
+                        Beautiful<br>
+                        <em>spaces.</em><br>
+                        Friendly<br>
+                        furniture.
+                    </h1>
+
+                    <p class="hero-text">
+
+                        Thoughtfully designed furniture,
+                        premium plywood décor and custom
+                        wooden pieces made to bring warmth,
+                        comfort and character to your space.
+
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="#products"
+                            class="primary-btn">
+
+                            Explore Collection →
+
+                        </a>
+
+                        <a
+                            href="#catalogues"
+                            class="secondary-btn">
+
+                            View Catalogues
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-right">
+
+                <div class="hero-badge">
+
+                    <strong>
+                        Made for you.
+                    </strong>
+
+                    <span>
+                        DESIGN • QUALITY • COMFORT
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PRODUCTS
+        ===================================================== -->
+
+        <section
+            class="section products-section"
+            id="products">
+
+            <div class="section-inner">
+
+                <div class="heading reveal">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            OUR COLLECTION
+                        </p>
+
+                        <h2>
+                            Pieces with<br>
+                            <em>personality.</em>
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Discover furniture designed to
+                        make your home feel comfortable,
+                        elegant and uniquely yours.
+                    </p>
+
+                </div>
+
+
+                <div class="filters reveal">
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all">
+
+                        All
+
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="living">
+
+                        Living
+
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="bedroom">
+
+                        Bedroom
+
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="office">
+
+                        Office
+
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="decor">
+
+                        Décor
+
+                    </button>
+
+                </div>
+
+
+                <div class="products-grid">
+
+
+                    <article
+                        class="product-card reveal"
+                        data-category="living">
+
+                        <div class="product-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=85"
+                                alt="Modern sofa"
+                                loading="lazy">
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <p class="product-category">
+                                LIVING
+                            </p>
+
+                            <h3>
+                                Modern Sofas
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+                    <article
+                        class="product-card reveal"
+                        data-category="bedroom">
+
+                        <div class="product-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85"
+                                alt="Premium bedroom"
+                                loading="lazy">
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <p class="product-category">
+                                BEDROOM
+                            </p>
+
+                            <h3>
+                                Bedroom Comfort
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+                    <article
+                        class="product-card reveal"
+                        data-category="office">
+
+                        <div class="product-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+                                alt="Office furniture"
+                                loading="lazy">
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <p class="product-category">
+                                OFFICE
+                            </p>
+
+                            <h3>
+                                Workspaces
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+                    <article
+                        class="product-card reveal"
+                        data-category="decor">
+
+                        <div class="product-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=85"
+                                alt="Home decor"
+                                loading="lazy">
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <p class="product-category">
+                                DÉCOR
+                            </p>
+
+                            <h3>
+                                Home Décor
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+                    <article
+                        class="product-card reveal"
+                        data-category="living">
+
+                        <div class="product-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+                                alt="Dining furniture"
+                                loading="lazy">
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <p class="product-category">
+                                LIVING
+                            </p>
+
+                            <h3>
+                                Dining Spaces
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+                    <article
+                        class="product-card reveal"
+                        data-category="bedroom">
+
+                        <div class="product-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=900&q=85"
+                                alt="Bedroom furniture"
+                                loading="lazy">
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <p class="product-category">
+                                BEDROOM
+                            </p>
+
+                            <h3>
+                                Elegant Interiors
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CATALOGUES
+        ===================================================== -->
+
+        <section
+            class="section catalogues-section"
+            id="catalogues">
+
+            <div class="section-inner">
+
+
+                <div class="heading reveal">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            OUR CATALOGUES
+                        </p>
+
+                        <h2>
+                            Explore our<br>
+                            <em>collections.</em>
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Browse our latest furniture and
+                        décor catalogues directly on the
+                        website.
+                    </p>
+
+                </div>
+
+
+                <div class="catalogue-grid">
+
+
+                    <!-- KORI -->
+
+                    <article class="catalogue-card reveal">
+
+                        <div class="catalogue-icon">
+                            K
+                        </div>
+
+                        <div>
+
+                            <p class="catalogue-label">
+                                CATALOGUE 01
+                            </p>
+
+                            <h3>
+                                KORI OZONE ACRYLIC
+                            </h3>
+
+                            <p class="catalogue-description">
+                                Explore the KORI OZONE Acrylic
+                                collection and discover premium
+                                surface options.
+                            </p>
+
+
+                            <button
+                                type="button"
+                                class="primary-btn catalogue-view-btn pdf-btn"
+                                data-pdf="KORI OZONE ACRYLIC FOLDER.pdf"
+                                data-title="KORI OZONE ACRYLIC">
+
+                                View Catalogue →
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PAPERLAM -->
+
+                    <article class="catalogue-card reveal">
+
+                        <div class="catalogue-icon">
+                            P
+                        </div>
+
+                        <div>
+
+                            <p class="catalogue-label">
+                                CATALOGUE 02
+                            </p>
+
+                            <h3>
+                                PAPERLAM INTERACTIVE
+                            </h3>
+
+                            <p class="catalogue-description">
+                                Explore the PAPERLAM collection
+                                and find the perfect finish
+                                for your space.
+                            </p>
+
+
+                            <button
+                                type="button"
+                                class="primary-btn catalogue-view-btn pdf-btn"
+                                data-pdf="PAPERLAM_INTERACTIVE.pdf"
+                                data-title="PAPERLAM INTERACTIVE">
+
+                                View Catalogue →
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ABOUT
+        ===================================================== -->
+
+        <section
+            class="section about-section"
+            id="about">
+
+            <div class="section-inner">
+
+                <div class="heading reveal">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            ABOUT FRIENDLY FURNITURE
+                        </p>
+
+                        <h2>
+                            Furniture that<br>
+                            feels like <em>home.</em>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <p class="about-text reveal">
+
+                    At Friendly Furniture, we believe
+                    furniture should be more than just
+                    beautiful. It should be comfortable,
+                    functional and made to fit your
+                    lifestyle. From thoughtfully selected
+                    materials to custom wooden pieces,
+                    we focus on quality and timeless design.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CONTACT
+        ===================================================== -->
+
+        <section
+            class="section contact-section"
+            id="contact">
+
+            <div class="section-inner">
+
+
+                <div class="heading reveal">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            GET IN TOUCH
+                        </p>
+
+                        <h2>
+                            Let's create<br>
+                            something <em>beautiful.</em>
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Have a question, custom requirement
+                        or furniture enquiry? Get in touch
+                        with us directly.
+                    </p>
+
+                </div>
+
+
+                <div class="contact-grid">
+
+
+                    <div class="contact-info reveal">
+
+                        <h3>
+                            Friendly service.<br>
+                            Beautiful furniture.
+                        </h3>
+
+                        <p>
+
+                            Contact us for product information,
+                            catalogue enquiries, custom furniture
+                            requirements and more.
+
+                        </p>
+
+
+                        <div class="contact-numbers">
+
+                            <a
+                                class="phone"
+                                href="tel:+917771936644">
+
+                                +91 77719 36644
+
+                            </a>
+
+
+                            <a
+                                class="phone"
+                                href="tel:+919589620499">
+
+                                +91 95896 20499
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        class="contact-form reveal"
+                        id="contactForm">
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Your Name"
+                            autocomplete="name"
+                            required>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Phone Number"
+                            autocomplete="tel"
+                            required>
+
+                        <input
+                            type="text"
+                            id="requirement"
+                            placeholder="What are you looking for?">
+
+                        <textarea
+                            id="message"
+                            placeholder="Tell us about your requirement..."
+                            required></textarea>
+
+                        <button
+                            type="submit"
+                            class="primary-btn">
+
+                            Send Enquiry →
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div class="footer-logo">
+                Friendly Furniture
+            </div>
+
+            <div class="footer-copy">
+                © 2026 Friendly Furniture.
+                All Rights Reserved.
+            </div>
 
         </div>
 
     </footer>
 
 
+    <!-- =====================================================
+         WHATSAPP
+    ===================================================== -->
 
-    <!-- PRODUCT MODAL -->
+    <a
+        href="https://wa.me/917771936644"
+        class="whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Friendly Furniture on WhatsApp">
 
-    <div class="modal" id="modal">
+        ☎
 
-        <div class="modal-box">
+    </a>
 
-            <button class="close" onclick="closeModal()">
-                ×
-            </button>
 
-            <p class="eyebrow" id="modalCategory">
-                PRODUCT
-            </p>
+    <!-- =====================================================
+         PDF VIEWER MODAL
+    ===================================================== -->
 
-            <h2 id="modalTitle">
-                Product
-            </h2>
+    <div
+        class="pdf-modal"
+        id="pdfModal"
+        aria-hidden="true">
 
-            <p class="modal-description" id="modalDescription">
-            </p>
+        <div
+            class="pdf-backdrop"
+            id="pdfBackdrop">
+        </div>
 
-            <button class="primary-btn" id="modalButton">
 
-                Enquire About This →
+        <div
+            class="pdf-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="pdfTitle">
 
-            </button>
+
+            <div class="pdf-topbar">
+
+                <div
+                    class="pdf-title"
+                    id="pdfTitle">
+
+                    Catalogue
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="pdf-close"
+                    id="pdfClose"
+                    aria-label="Close Catalogue">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="pdf-viewer"
+                id="pdfViewer">
+
+
+                <div
+                    class="pdf-loading"
+                    id="pdfLoading">
+
+                    Loading catalogue...
+
+                </div>
+
+
+                <div
+                    class="pdf-pages"
+                    id="pdfPages">
+                </div>
+
+
+            </div>
 
         </div>
 
     </div>
 
 
-
-    <div class="toast" id="toast">
-        Opening WhatsApp...
-    </div>
-
-
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
 
     <script>
 
-        /* CONTACT DETAILS */
-
-        const WHATSAPP = "917771936644";
-
-
-
-        /* NAVBAR */
-
-        const navbar =
-            document.getElementById("navbar");
-
-        window.addEventListener("scroll", () => {
-
-            if (window.scrollY > 40) {
-
-                navbar.classList.add("scrolled");
-
-            } else {
-
-                navbar.classList.remove("scrolled");
-
-            }
-
-        });
-
-
-
-        /* MOBILE MENU */
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
 
         const menuBtn =
             document.getElementById("menuBtn");
@@ -2168,129 +2094,77 @@
         const navLinks =
             document.getElementById("navLinks");
 
-        menuBtn.addEventListener("click", () => {
 
-            navLinks.classList.toggle("open");
+        if (menuBtn && navLinks) {
 
-        });
+            menuBtn.addEventListener("click", () => {
+
+                navLinks.classList.toggle("open");
+
+            });
+
+        }
 
 
-        document.querySelectorAll(".nav-links a")
+        document
+            .querySelectorAll(".nav-links a")
             .forEach(link => {
 
                 link.addEventListener("click", () => {
 
-                    navLinks.classList.remove("open");
+                    if (navLinks) {
+                        navLinks.classList.remove("open");
+                    }
 
                 });
 
             });
 
 
+        /* =====================================================
+           PRODUCT FILTER
+        ===================================================== */
 
-        /* SCROLL REVEAL */
+        const filterButtons =
+            document.querySelectorAll(".filter-btn");
 
-        const reveals =
-            document.querySelectorAll(".reveal");
-
-
-        const observer =
-            new IntersectionObserver(
-
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("visible");
-
-                            observer.unobserve(entry.target);
-
-                        }
-
-                    });
-
-                },
-
-                {
-                    threshold: .12
-                }
-
-            );
+        const productCards =
+            document.querySelectorAll(".product-card");
 
 
-        reveals.forEach(el => {
+        filterButtons.forEach(button => {
 
-            observer.observe(el);
+            button.addEventListener("click", () => {
 
-        });
-
-
-
-        /* PRODUCT FILTER */
-
-        const filters =
-            document.querySelectorAll(".filter");
-
-        const products =
-            document.querySelectorAll(".product");
-
-
-        filters.forEach(filter => {
-
-            filter.addEventListener("click", () => {
-
-                filters.forEach(btn => {
+                filterButtons.forEach(btn => {
 
                     btn.classList.remove("active");
 
                 });
 
-                filter.classList.add("active");
+                button.classList.add("active");
 
 
-                const selected =
-                    filter.dataset.filter;
+                const filter =
+                    button.dataset.filter;
 
 
-                products.forEach(product => {
+                productCards.forEach(card => {
 
                     const category =
-                        product.dataset.category;
+                        card.dataset.category;
 
 
                     if (
-                        selected === "all" ||
-                        category === selected
+                        filter === "all" ||
+                        category === filter
                     ) {
 
-                        product.classList.remove("hide");
-
-
-                        product.animate(
-
-                            [
-                                {
-                                    opacity: 0,
-                                    transform: "translateY(25px)"
-                                },
-                                {
-                                    opacity: 1,
-                                    transform: "translateY(0)"
-                                }
-                            ],
-
-                            {
-                                duration: 450,
-                                easing: "ease-out"
-                            }
-
-                        );
+                        card.style.display = "";
 
                     } else {
 
-                        product.classList.add("hide");
+                        card.style.display = "none";
 
                     }
 
@@ -2301,200 +2175,704 @@
         });
 
 
+        /* =====================================================
+           REVEAL ANIMATION
+        ===================================================== */
 
-        /* PRODUCT MODAL */
+        if ("IntersectionObserver" in window) {
 
-        const modal =
-            document.getElementById("modal");
+            const revealObserver =
+                new IntersectionObserver(
+                    entries => {
 
-        const modalTitle =
-            document.getElementById("modalTitle");
+                        entries.forEach(entry => {
 
-        const modalCategory =
-            document.getElementById("modalCategory");
+                            if (entry.isIntersecting) {
 
-        const modalDescription =
-            document.getElementById("modalDescription");
+                                entry.target.classList.add(
+                                    "visible"
+                                );
 
-        const modalButton =
-            document.getElementById("modalButton");
+                                revealObserver.unobserve(
+                                    entry.target
+                                );
 
+                            }
 
-        let selectedProduct = "";
+                        });
 
-
-        function openProduct(title, category, description) {
-
-            selectedProduct = title;
-
-            modalTitle.textContent = title;
-
-            modalCategory.textContent = category;
-
-            modalDescription.textContent = description;
-
-            modal.classList.add("show");
-
-            document.body.style.overflow = "hidden";
-
-        }
+                    },
+                    {
+                        threshold: .1
+                    }
+                );
 
 
-        function closeModal() {
+            document
+                .querySelectorAll(".reveal")
+                .forEach(element => {
 
-            modal.classList.remove("show");
+                    revealObserver.observe(element);
 
-            document.body.style.overflow = "";
+                });
 
-        }
+        } else {
 
+            document
+                .querySelectorAll(".reveal")
+                .forEach(element => {
 
-        modal.addEventListener("click", (e) => {
+                    element.classList.add("visible");
 
-            if (e.target === modal) {
-
-                closeModal();
-
-            }
-
-        });
-
-
-        modalButton.addEventListener("click", () => {
-
-            enquire(selectedProduct);
-
-            closeModal();
-
-        });
-
-
-        document.addEventListener("keydown", (e) => {
-
-            if (e.key === "Escape") {
-
-                closeModal();
-
-            }
-
-        });
-
-
-
-        /* WHATSAPP PRODUCT ENQUIRY */
-
-        function enquire(productName) {
-
-            const message =
-                `Hello, I am interested in "${productName}".
-
-Please share more details, price and availability.`;
-
-            const url =
-                `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-            window.open(url, "_blank");
+                });
 
         }
 
 
+        /* =====================================================
+           WHATSAPP CONTACT FORM
+        ===================================================== */
 
-        /* CONTACT FORM */
+        const WHATSAPP =
+            "917771936644";
 
-        const form =
+
+        const contactForm =
             document.getElementById("contactForm");
 
 
-        form.addEventListener("submit", (e) => {
+        if (contactForm) {
 
-            e.preventDefault();
+            contactForm.addEventListener(
+                "submit",
+                event => {
 
-
-            const name =
-                document.getElementById("name").value.trim();
-
-            const phone =
-                document.getElementById("phone").value.trim();
-
-            const requirement =
-                document.getElementById("requirement").value;
-
-            const message =
-                document.getElementById("message").value.trim();
+                    event.preventDefault();
 
 
-            const whatsappMessage =
-                `Hello, I would like to make an enquiry.
+                    const name =
+                        document
+                            .getElementById("name")
+                            .value
+                            .trim();
+
+
+                    const phone =
+                        document
+                            .getElementById("phone")
+                            .value
+                            .trim();
+
+
+                    const requirement =
+                        document
+                            .getElementById("requirement")
+                            .value
+                            .trim();
+
+
+                    const message =
+                        document
+                            .getElementById("message")
+                            .value
+                            .trim();
+
+
+                    const whatsappMessage =
+`Hello Friendly Furniture!
 
 Name: ${name}
 Phone: ${phone}
 Requirement: ${requirement}
-
-Message:
-${message}`;
+Message: ${message}`;
 
 
-            const url =
-                `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}`;
+                    const url =
+                        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+                            whatsappMessage
+                        )}`;
 
 
-            showToast("Opening WhatsApp...");
+                    window.open(
+                        url,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
 
-
-            setTimeout(() => {
-
-                window.open(url, "_blank");
-
-            }, 400);
-
-        });
-
-
-
-        /* TOAST */
-
-        function showToast(message) {
-
-            const toast =
-                document.getElementById("toast");
-
-            toast.textContent = message;
-
-            toast.classList.add("show");
-
-
-            setTimeout(() => {
-
-                toast.classList.remove("show");
-
-            }, 3000);
+                }
+            );
 
         }
 
 
+        /* =====================================================
+           PDF.JS CONFIGURATION
+        ===================================================== */
 
-        /* HERO PARALLAX */
+        if (typeof pdfjsLib !== "undefined") {
 
-        const heroVisual =
-            document.querySelector(".hero-visual");
+            pdfjsLib.GlobalWorkerOptions.workerSrc =
+                "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-
-        window.addEventListener("scroll", () => {
-
-            if (!heroVisual) return;
+        }
 
 
-            if (window.scrollY < window.innerHeight) {
+        /* =====================================================
+           PDF ELEMENTS
+        ===================================================== */
 
-                heroVisual.style.transform =
-                    `translateY(${window.scrollY * .06}px)`;
+        const pdfModal =
+            document.getElementById("pdfModal");
+
+        const pdfBackdrop =
+            document.getElementById("pdfBackdrop");
+
+        const pdfClose =
+            document.getElementById("pdfClose");
+
+        const pdfTitle =
+            document.getElementById("pdfTitle");
+
+        const pdfViewer =
+            document.getElementById("pdfViewer");
+
+        const pdfPages =
+            document.getElementById("pdfPages");
+
+        const pdfLoading =
+            document.getElementById("pdfLoading");
+
+
+        let pdfLoadingTask = null;
+
+
+        /* =====================================================
+           GET CORRECT PDF PATH
+        ===================================================== */
+
+        function getPdfPath(fileName) {
+
+            /*
+             * This automatically creates the correct path
+             * for GitHub Pages and normal hosting.
+             *
+             * PDF files must be in the same folder as index.html.
+             */
+
+            return new URL(
+                fileName,
+                window.location.href
+            ).href;
+
+        }
+
+
+        /* =====================================================
+           OPEN PDF
+        ===================================================== */
+
+        async function openPdf(file, title) {
+
+            if (
+                !pdfModal ||
+                !pdfViewer ||
+                !pdfPages ||
+                !pdfLoading
+            ) {
+
+                return;
 
             }
 
-        });
+
+            pdfTitle.textContent =
+                title;
+
+
+            pdfPages.innerHTML =
+                "";
+
+
+            pdfViewer.scrollTop =
+                0;
+
+
+            pdfLoading.textContent =
+                "Loading catalogue...";
+
+
+            pdfLoading.classList.remove(
+                "hidden"
+            );
+
+
+            pdfModal.classList.add(
+                "show"
+            );
+
+
+            pdfModal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+
+            try {
+
+                if (
+                    typeof pdfjsLib === "undefined"
+                ) {
+
+                    throw new Error(
+                        "PDF.js failed to load."
+                    );
+
+                }
+
+
+                const pdfUrl =
+                    getPdfPath(file);
+
+
+                console.log(
+                    "PDF URL:",
+                    pdfUrl
+                );
+
+
+                if (pdfLoadingTask) {
+
+                    try {
+
+                        await pdfLoadingTask.destroy();
+
+                    } catch (e) {
+
+                        console.warn(
+                            "Previous PDF cleanup:",
+                            e
+                        );
+
+                    }
+
+                    pdfLoadingTask =
+                        null;
+
+                }
+
+
+                pdfLoadingTask =
+                    pdfjsLib.getDocument({
+                        url: pdfUrl,
+                        disableAutoFetch: false,
+                        disableStream: false
+                    });
+
+
+                const pdf =
+                    await pdfLoadingTask.promise;
+
+
+                pdfLoading.classList.add(
+                    "hidden"
+                );
+
+
+                /*
+                 * Render every page.
+                 */
+
+                for (
+                    let pageNumber = 1;
+                    pageNumber <= pdf.numPages;
+                    pageNumber++
+                ) {
+
+                    const page =
+                        await pdf.getPage(
+                            pageNumber
+                        );
+
+
+                    const baseViewport =
+                        page.getViewport({
+                            scale: 1
+                        });
+
+
+                    const availableWidth =
+                        Math.max(
+                            280,
+                            pdfViewer.clientWidth - 50
+                        );
+
+
+                    let scale =
+                        availableWidth /
+                        baseViewport.width;
+
+
+                    /*
+                     * Prevent extremely large canvases.
+                     */
+
+                    scale =
+                        Math.min(
+                            scale,
+                            1.65
+                        );
+
+
+                    /*
+                     * Better mobile scaling.
+                     */
+
+                    if (
+                        window.innerWidth <= 650
+                    ) {
+
+                        scale =
+                            Math.min(
+                                scale,
+                                1.25
+                            );
+
+                    }
+
+
+                    const viewport =
+                        page.getViewport({
+                            scale: scale
+                        });
+
+
+                    const canvas =
+                        document.createElement(
+                            "canvas"
+                        );
+
+
+                    canvas.className =
+                        "pdf-page";
+
+
+                    canvas.setAttribute(
+                        "aria-label",
+                        `Catalogue page ${pageNumber}`
+                    );
+
+
+                    const context =
+                        canvas.getContext(
+                            "2d",
+                            {
+                                alpha: false
+                            }
+                        );
+
+
+                    canvas.width =
+                        Math.floor(
+                            viewport.width
+                        );
+
+
+                    canvas.height =
+                        Math.floor(
+                            viewport.height
+                        );
+
+
+                    pdfPages.appendChild(
+                        canvas
+                    );
+
+
+                    await page.render({
+
+                        canvasContext:
+                            context,
+
+                        viewport:
+                            viewport
+
+                    }).promise;
+
+                }
+
+
+                pdfLoadingTask =
+                    null;
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "PDF loading error:",
+                    error
+                );
+
+
+                pdfLoading.classList.add(
+                    "hidden"
+                );
+
+
+                pdfPages.innerHTML = `
+
+                    <div class="pdf-error">
+
+                        <h3>
+                            Catalogue could not be opened
+                        </h3>
+
+                        <p>
+                            Please make sure the PDF is
+                            uploaded to the same folder as
+                            index.html and that the filename
+                            is exactly correct.
+                        </p>
+
+                        <p style="margin-top:12px;">
+                            ${file}
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CATALOGUE BUTTONS
+        ===================================================== */
+
+        document
+            .querySelectorAll(".pdf-btn")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const file =
+                            button.dataset.pdf;
+
+
+                        const title =
+                            button.dataset.title;
+
+
+                        openPdf(
+                            file,
+                            title
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =====================================================
+           CLOSE PDF
+        ===================================================== */
+
+        function closePdf() {
+
+            if (!pdfModal) {
+                return;
+            }
+
+
+            pdfModal.classList.remove(
+                "show"
+            );
+
+
+            pdfModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+
+            pdfPages.innerHTML =
+                "";
+
+
+            pdfLoading.classList.remove(
+                "hidden"
+            );
+
+
+            if (pdfLoadingTask) {
+
+                try {
+
+                    pdfLoadingTask.destroy();
+
+                } catch (e) {
+
+                    console.warn(
+                        "PDF cleanup:",
+                        e
+                    );
+
+                }
+
+                pdfLoadingTask =
+                    null;
+
+            }
+
+        }
+
+
+        if (pdfClose) {
+
+            pdfClose.addEventListener(
+                "click",
+                closePdf
+            );
+
+        }
+
+
+        if (pdfBackdrop) {
+
+            pdfBackdrop.addEventListener(
+                "click",
+                closePdf
+            );
+
+        }
+
+
+        /* =====================================================
+           ESC KEY
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    pdfModal &&
+                    pdfModal.classList.contains("show")
+                ) {
+
+                    closePdf();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           PREVENT RIGHT CLICK INSIDE PDF
+        ===================================================== */
+
+        if (pdfViewer) {
+
+            pdfViewer.addEventListener(
+                "contextmenu",
+                event => {
+
+                    event.preventDefault();
+
+                }
+            );
+
+
+            pdfViewer.addEventListener(
+                "dragstart",
+                event => {
+
+                    event.preventDefault();
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           DISABLE SAVE / PRINT SHORTCUTS WHILE PDF OPEN
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    !pdfModal ||
+                    !pdfModal.classList.contains("show")
+                ) {
+
+                    return;
+
+                }
+
+
+                const key =
+                    event.key.toLowerCase();
+
+
+                if (
+                    (event.ctrlKey ||
+                        event.metaKey) &&
+                    (
+                        key === "s" ||
+                        key === "p"
+                    )
+                ) {
+
+                    event.preventDefault();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           PREVENT PDF CANVAS SELECTION
+        ===================================================== */
+
+        document.addEventListener(
+            "selectstart",
+            event => {
+
+                if (
+                    pdfModal &&
+                    pdfModal.classList.contains("show") &&
+                    event.target.closest(".pdf-viewer")
+                ) {
+
+                    event.preventDefault();
+
+                }
+
+            }
+        );
 
     </script>
-
 
 </body>
 
