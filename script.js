@@ -232,7 +232,7 @@ modalEnquire.addEventListener("click", () => {
 
 function enquireProduct(productName) {
 
-  const phone = "919999999999";
+  const WHATSAPP = "917771936644";;
 
   const message =
     `Hello, I am interested in "${productName}". Please share more details, price and availability.`;
@@ -263,8 +263,6 @@ contactForm.addEventListener("submit", (event) => {
   const phone =
     document.getElementById("phone").value.trim();
 
-  const email =
-    document.getElementById("email").value.trim();
 
   const requirement =
     document.getElementById("requirement").value;
@@ -273,16 +271,14 @@ contactForm.addEventListener("submit", (event) => {
     document.getElementById("message").value.trim();
 
 
-  const whatsappNumber =
-    "919999999999";
+  const WHATSAPP = "917771936644";
 
 
   const whatsappMessage =
-`Hello, I would like to make an enquiry.
+    `Hello, I would like to make an enquiry.
 
 Name: ${name}
 Phone: ${phone}
-Email: ${email}
 Requirement: ${requirement}
 
 Message:
