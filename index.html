@@ -990,6 +990,44 @@
             background: rgba(255,255,255,.2);
         }
 
+        .pdf-zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+            margin-right: 12px;
+        }
+
+        .pdf-zoom-btn {
+            min-width: 34px;
+            height: 34px;
+            padding: 0 8px;
+            border: 1px solid rgba(255,255,255,.25);
+            background: rgba(255,255,255,.08);
+            color: white;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .pdf-zoom-btn:hover {
+            background: rgba(255,255,255,.2);
+        }
+
+        .pdf-zoom-level {
+            min-width: 42px;
+            text-align: center;
+            color: rgba(255,255,255,.85);
+            font-size: 11px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .pdf-fit-btn {
+            font-size: 11px;
+            min-width: 42px;
+        }
+
 
         /* =====================================================
            CUSTOM PDF VIEWER
@@ -1253,7 +1291,32 @@
             }
 
             .pdf-title {
-                font-size: 19px;
+                font-size: 16px;
+                max-width: 30%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .pdf-zoom-controls {
+                gap: 4px;
+                margin-right: 8px;
+            }
+
+            .pdf-zoom-btn {
+                min-width: 30px;
+                height: 32px;
+                padding: 0 6px;
+            }
+
+            .pdf-zoom-level {
+                min-width: 34px;
+                font-size: 10px;
+            }
+
+            .pdf-fit-btn {
+                min-width: 34px;
+                font-size: 10px;
             }
 
             .pdf-pages {
@@ -2040,6 +2103,13 @@
                 </div>
 
 
+                <div class="pdf-zoom-controls" aria-label="PDF zoom controls">
+                    <button type="button" class="pdf-zoom-btn" id="pdfZoomOut" aria-label="Zoom out">−</button>
+                    <span class="pdf-zoom-level" id="pdfZoomLevel">100%</span>
+                    <button type="button" class="pdf-zoom-btn" id="pdfZoomIn" aria-label="Zoom in">+</button>
+                    <button type="button" class="pdf-zoom-btn pdf-fit-btn" id="pdfZoomFit" aria-label="Fit page to screen">Fit</button>
+                </div>
+
                 <button
                     type="button"
                     class="pdf-close"
@@ -2344,8 +2414,16 @@ Message: ${message}`;
         const pdfLoading =
             document.getElementById("pdfLoading");
 
+        const pdfZoomIn = document.getElementById("pdfZoomIn");
+        const pdfZoomOut = document.getElementById("pdfZoomOut");
+        const pdfZoomFit = document.getElementById("pdfZoomFit");
+        const pdfZoomLevel = document.getElementById("pdfZoomLevel");
 
         let pdfLoadingTask = null;
+        let currentPdfDocument = null;
+        let currentZoom = 1;
+        let baseFitScale = 1;
+        let renderSequence = 0;
 
 
         /* =====================================================
@@ -2367,6 +2445,58 @@ Message: ${message}`;
             ).href;
 
         }
+
+
+        /* =====================================================
+           HIGH-RESOLUTION PDF RENDERER + ZOOM
+        ===================================================== */
+
+        async function renderPdfPages() {
+            if (!currentPdfDocument || !pdfViewer || !pdfPages) return;
+
+            const sequence = ++renderSequence;
+            pdfPages.innerHTML = "";
+
+            // Fit each page to the viewer width, then apply the user's zoom.
+            const availableWidth = Math.max(220, pdfViewer.clientWidth - 32);
+            const outputScale = Math.min(window.devicePixelRatio || 1, 3);
+
+            for (let pageNumber = 1; pageNumber <= currentPdfDocument.numPages; pageNumber++) {
+                if (sequence !== renderSequence) return;
+
+                const page = await currentPdfDocument.getPage(pageNumber);
+                const baseViewport = page.getViewport({ scale: 1 });
+                baseFitScale = availableWidth / baseViewport.width;
+                const displayScale = baseFitScale * currentZoom;
+                const viewport = page.getViewport({ scale: displayScale });
+                const canvas = document.createElement("canvas");
+                canvas.className = "pdf-page";
+                canvas.setAttribute("aria-label", `Catalogue page ${pageNumber}`);
+                canvas.style.width = `${viewport.width}px`;
+                canvas.style.height = `${viewport.height}px`;
+                canvas.style.flex = "0 0 auto";
+                canvas.width = Math.ceil(viewport.width * outputScale);
+                canvas.height = Math.ceil(viewport.height * outputScale);
+                const context = canvas.getContext("2d", { alpha: false });
+                pdfPages.appendChild(canvas);
+
+                await page.render({
+                    canvasContext: context,
+                    viewport,
+                    transform: outputScale === 1 ? null : [outputScale, 0, 0, outputScale, 0, 0]
+                }).promise;
+            }
+        }
+
+        function updatePdfZoom(nextZoom) {
+            currentZoom = Math.max(1, Math.min(3, nextZoom));
+            if (pdfZoomLevel) pdfZoomLevel.textContent = `${Math.round(currentZoom * 100)}%`;
+            if (currentPdfDocument) renderPdfPages().catch(error => console.error("PDF render error:", error));
+        }
+
+        if (pdfZoomIn) pdfZoomIn.addEventListener("click", () => updatePdfZoom(currentZoom + 0.25));
+        if (pdfZoomOut) pdfZoomOut.addEventListener("click", () => updatePdfZoom(currentZoom - 0.25));
+        if (pdfZoomFit) pdfZoomFit.addEventListener("click", () => updatePdfZoom(1));
 
 
         /* =====================================================
@@ -2485,136 +2615,11 @@ Message: ${message}`;
                 );
 
 
-                /*
-                 * Render every page.
-                 */
-
-                for (
-                    let pageNumber = 1;
-                    pageNumber <= pdf.numPages;
-                    pageNumber++
-                ) {
-
-                    const page =
-                        await pdf.getPage(
-                            pageNumber
-                        );
-
-
-                    const baseViewport =
-                        page.getViewport({
-                            scale: 1
-                        });
-
-
-                    const availableWidth =
-                        Math.max(
-                            280,
-                            pdfViewer.clientWidth - 50
-                        );
-
-
-                    let scale =
-                        availableWidth /
-                        baseViewport.width;
-
-
-                    /*
-                     * Prevent extremely large canvases.
-                     */
-
-                    scale =
-                        Math.min(
-                            scale,
-                            1.65
-                        );
-
-
-                    /*
-                     * Better mobile scaling.
-                     */
-
-                    if (
-                        window.innerWidth <= 650
-                    ) {
-
-                        scale =
-                            Math.min(
-                                scale,
-                                1.25
-                            );
-
-                    }
-
-
-                    const viewport =
-                        page.getViewport({
-                            scale: scale
-                        });
-
-
-                    const canvas =
-                        document.createElement(
-                            "canvas"
-                        );
-
-
-                    canvas.className =
-                        "pdf-page";
-
-
-                    canvas.setAttribute(
-                        "aria-label",
-                        `Catalogue page ${pageNumber}`
-                    );
-
-
-                    const context =
-                        canvas.getContext(
-                            "2d",
-                            {
-                                alpha: false
-                            }
-                        );
-
-
-                    /*
-                     * High-DPI rendering:
-                     * Mobile phones often have devicePixelRatio 2 or 3.
-                     * The old code rendered only 1 pixel per CSS pixel,
-                     * which made PDF text look blurry on phone screens.
-                     */
-                    const outputScale = Math.min(
-                        window.devicePixelRatio || 1,
-                        3
-                    );
-
-                    canvas.width = Math.ceil(
-                        viewport.width * outputScale
-                    );
-
-                    canvas.height = Math.ceil(
-                        viewport.height * outputScale
-                    );
-
-                    /*
-                     * Keep the displayed size in CSS pixels while the
-                     * internal canvas bitmap uses more pixels for clarity.
-                     */
-                    canvas.style.width = `${viewport.width}px`;
-                    canvas.style.height = `${viewport.height}px`;
-
-                    pdfPages.appendChild(canvas);
-
-                    await page.render({
-                        canvasContext: context,
-                        viewport: viewport,
-                        transform: outputScale === 1
-                            ? null
-                            : [outputScale, 0, 0, outputScale, 0, 0]
-                    }).promise;
-
-                }
+                currentPdfDocument = pdf;
+                currentZoom = 1;
+                pdfZoomLevel.textContent = "100%";
+                pdfViewer.scrollTop = 0;
+                await renderPdfPages();
 
 
                 pdfLoadingTask =
@@ -2708,6 +2713,9 @@ Message: ${message}`;
             pdfModal.classList.remove(
                 "show"
             );
+
+            renderSequence++;
+            currentPdfDocument = null;
 
 
             pdfModal.setAttribute(
