@@ -1030,6 +1030,8 @@
         .pdf-page {
             display: block;
 
+            flex: 0 0 auto;
+
             max-width: 100%;
 
             height: auto;
@@ -2576,31 +2578,40 @@ Message: ${message}`;
                         );
 
 
-                    canvas.width =
-                        Math.floor(
-                            viewport.width
-                        );
-
-
-                    canvas.height =
-                        Math.floor(
-                            viewport.height
-                        );
-
-
-                    pdfPages.appendChild(
-                        canvas
+                    /*
+                     * High-DPI rendering:
+                     * Mobile phones often have devicePixelRatio 2 or 3.
+                     * The old code rendered only 1 pixel per CSS pixel,
+                     * which made PDF text look blurry on phone screens.
+                     */
+                    const outputScale = Math.min(
+                        window.devicePixelRatio || 1,
+                        3
                     );
 
+                    canvas.width = Math.ceil(
+                        viewport.width * outputScale
+                    );
+
+                    canvas.height = Math.ceil(
+                        viewport.height * outputScale
+                    );
+
+                    /*
+                     * Keep the displayed size in CSS pixels while the
+                     * internal canvas bitmap uses more pixels for clarity.
+                     */
+                    canvas.style.width = `${viewport.width}px`;
+                    canvas.style.height = `${viewport.height}px`;
+
+                    pdfPages.appendChild(canvas);
 
                     await page.render({
-
-                        canvasContext:
-                            context,
-
-                        viewport:
-                            viewport
-
+                        canvasContext: context,
+                        viewport: viewport,
+                        transform: outputScale === 1
+                            ? null
+                            : [outputScale, 0, 0, outputScale, 0, 0]
                     }).promise;
 
                 }
